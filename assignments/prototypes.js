@@ -139,5 +139,30 @@ Humanoid.prototype.greet = function() {
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+  // * Give the Hero and Villains different methods that could be used to remove health points from objects 
+  //   which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  
+  function HeroVillain(hvAttrs) {
+    Humanoid.call(this, hvAttrs);
+    this.type = hvAttrs.type;
+  }
+
+  HeroVillain.prototype = Object.create(Humanoid.prototype);
+
+  HeroVillain.prototype.damage = function() {
+    if (this.type === "hero") {
+      this.healthPoints = this.healthPoints - 2 + 0.1*this.healthPoints;
+      if (this.healthPoints <= 0) {
+        return `${this.name} is dead`
+      }
+    }
+    if (this.type === "villian") {
+      this.healthPoints = this.healthPoints -2;
+      if (this.healthPoints <= 0) {
+        return `${this.name} is dead`
+      }
+    }
+  }
+
+  
